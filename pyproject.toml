@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "ok_to_wake"
+version = "0.1.0"
+description = ""
+authors = ["Jacob Erickson <jacob.erickson@wibotic.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.15.5"
+black = "^22.10.0"
+mypy = "^0.990"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
