@@ -6,6 +6,7 @@ authors = ["Jacob Erickson <jacob.erickson@wibotic.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+micropython-rp2-stubs = "^1.19.1"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.15.5"
