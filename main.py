@@ -1,18 +1,12 @@
+from machine import Timer
+
 import led_control
 
-led_control.color_pwm_set(0, 0, 100)
+led_control.color_pwm_set(0, 0, 100)  # Blue
 import connect
 import home_time
 
-led_control.color_pwm_set(0, 100, 0)
-
-from machine import Timer, Pin
-
-heartbeat_led = Pin("LED", Pin.OUT)
-
-
-def heartbeat(_):
-    heartbeat_led.toggle()
+led_control.color_pwm_set(0, 100, 0)  # Green
 
 
 def led_check(_):
@@ -28,8 +22,5 @@ def led_check(_):
         led_control.color_pwm_set(100, 100, 100)
 
 
-heartbeat_timer = Timer()
-heartbeat_timer.init(freq=1, mode=Timer.PERIODIC, callback=heartbeat)
-
 led_check_timer = Timer()
-led_check_timer.init(freq=0.5, mode=Timer.PERIODIC, callback=led_check)
+led_check_timer.init(period=3000, mode=Timer.PERIODIC, callback=led_check)
