@@ -4,6 +4,8 @@ PWM_100_U16 = 65535
 PWM_FREQ = 500
 
 heartbeat_led = Pin("LED", Pin.OUT)
+heartbeat_timer = Timer()
+
 pwm_r = PWM(Pin(17))
 pwm_g = PWM(Pin(18))
 pwm_b = PWM(Pin(19))
@@ -23,5 +25,5 @@ def heartbeat(_):
     heartbeat_led.toggle()
 
 
-heartbeat_timer = Timer()
-heartbeat_timer.init(period=1000, mode=Timer.PERIODIC, callback=heartbeat)
+def run_heartbeat(period: int):
+    heartbeat_timer.init(period=period, mode=Timer.PERIODIC, callback=heartbeat)

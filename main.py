@@ -3,9 +3,11 @@ from machine import Timer
 import led_control
 
 led_control.color_pwm_set(0, 0, 100)  # Blue
+led_control.run_heartbeat(period=10)
 import connect
 import home_time
 
+led_control.run_heartbeat(period=1000)
 led_control.color_pwm_set(0, 100, 0)  # Green
 
 
