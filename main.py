@@ -1,46 +1,35 @@
-import machine
-import time
+import led_control
 
-LATCH = machine.Pin(16, machine.Pin.OUT)
-SHIFT = machine.Pin(5, machine.Pin.OUT)
-SERIAL = machine.Pin(10, machine.Pin.OUT)
+led_control.color_pwm_set(0, 0, 100)
+import connect
+import home_time
 
-LATCH.value(0)
-SHIFT.value(0)
-SERIAL.value(0)
+led_control.color_pwm_set(0, 100, 0)
 
-TIME_FLIP = 0.002
-TIME_ANIM = 0.1
+from machine import Timer, Pin
 
-def reset_register():
-    set_register('0'*8)
-
-def set_register(output):
-    LATCH.value(0)
-    for value in output:
-        SERIAL.value(int(value))
-        time.sleep(TIME_FLIP)
-        SHIFT.value(1)
-        time.sleep(TIME_FLIP)
-        SHIFT.value(0)
-        time.sleep(TIME_FLIP)
-    LATCH.value(1)
-    time.sleep(TIME_FLIP)
-    LATCH.value(0)
-
-def scan():
-    for i in range(16):
-        time.sleep(TIME_ANIM)
-        register = ['0']*8
-        if i <=7:
-            register[i] = '1'
-        else:
-            register[15-i] = '1'
-        set_register(''.join(register))
+heartbeat_led = Pin("LED", Pin.OUT)
 
 
-def main():
-    reset_register()
-    scan()
+def heartbeat(_):
+    heartbeat_led.toggle()
 
-main()
+
+def led_check(_):
+    current_time = home_time.get_home_time()
+    print(current_time["sec"])
+    if current_time["sec"] > 45:
+        led_control.color_pwm_set(100, 0, 0)
+    elif current_time["sec"] > 30:
+        led_control.color_pwm_set(0, 100, 0)
+    elif current_time["sec"] > 15:
+        led_control.color_pwm_set(0, 0, 100)
+    else:
+        led_control.color_pwm_set(100, 100, 100)
+
+
+heartbeat_timer = Timer()
+heartbeat_timer.init(freq=1, mode=Timer.PERIODIC, callback=heartbeat)
+
+led_check_timer = Timer()
+led_check_timer.init(freq=3, mode=Timer.PERIODIC, callback=led_check)
