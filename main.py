@@ -32,4 +32,4 @@ heartbeat_timer = Timer()
 heartbeat_timer.init(freq=1, mode=Timer.PERIODIC, callback=heartbeat)
 
 led_check_timer = Timer()
-led_check_timer.init(freq=3, mode=Timer.PERIODIC, callback=led_check)
+led_check_timer.init(freq=0.5, mode=Timer.PERIODIC, callback=led_check)
