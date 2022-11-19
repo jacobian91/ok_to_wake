@@ -1,4 +1,4 @@
-from machine import Timer
+from machine import Timer, reset
 
 import led_control
 
@@ -25,7 +25,7 @@ LIGHT_TIMES = [
 ]
 
 
-def led_check(_):
+def led_check(timer_param=None):
     current_time = home_time.get_home_time()
     time_s = [f"{name}={current_time[name]}" for name in home_time.TIME_NAMES]
     time_s = " ".join(time_s)
@@ -37,6 +37,7 @@ def led_check(_):
             break
 
 
+led_check()  # Set immediatly instead of waiting for timer
 led_check_timer = Timer()
 led_check_timer.init(period=20000, mode=Timer.PERIODIC, callback=led_check)
 
