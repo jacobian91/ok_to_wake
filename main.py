@@ -26,3 +26,8 @@ def led_check(_):
 
 led_check_timer = Timer()
 led_check_timer.init(period=3000, mode=Timer.PERIODIC, callback=led_check)
+
+
+def stop():
+    led_check_timer.deinit()
+    led_control.heartbeat_timer.deinit()
