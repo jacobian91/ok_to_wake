@@ -19,7 +19,7 @@ class WLAN_STATUSES:
     STAT_GOT_IP = 3
 
 
-def reconnect(_):
+def reconnect(timer_param=None):
     if not wlan.isconnected():
         wlan.connect(credentials.wifi_ssid, credentials.wifi_pass)
         while True:
@@ -40,7 +40,7 @@ def reconnect(_):
 
 
 while True:
-    if reconnect(None):
+    if reconnect():
         break
 
 connection_timer = Timer()

@@ -8,6 +8,9 @@ import connect
 
 connect.reconnect()
 import home_time
+from webrepl import webrepl
+
+webrepl.start()
 
 led_control.run_heartbeat(period=4000)
 led_control.color_pwm_set(0, 100, 0)  # Green
