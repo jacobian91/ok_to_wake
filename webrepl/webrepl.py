@@ -121,9 +121,12 @@ def accept_conn(listen_sock):
     prev = os.dupterm(None)
     os.dupterm(prev)
     if prev:
-        print("\nConcurrent WebREPL connection from", remote_addr, "rejected")
-        cl.close()
-        return False
+        print(
+            "\nConcurrent WebREPL connection from",
+            remote_addr,
+            "overtaking as new connection and closing this one",
+        )
+        prev.close()
     print("\nWebREPL connection from:", remote_addr)
     client_s = cl
 
