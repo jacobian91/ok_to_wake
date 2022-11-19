@@ -1,6 +1,7 @@
 import network
 import time
 import credentials
+from machine import Timer
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -18,9 +19,8 @@ class WLAN_STATUSES:
     STAT_GOT_IP = 3
 
 
-# Wait for connect or fail
-def reconnect():
-    while True:
+def reconnect(_):
+    if not wlan.isconnected():
         wlan.connect(credentials.wifi_ssid, credentials.wifi_pass)
         while True:
             time.sleep(1)
@@ -29,10 +29,19 @@ def reconnect():
             if status == WLAN_STATUSES.STAT_GOT_IP:
                 config = wlan.ifconfig()
                 print("Connected IP = " + config[0])
-                return
+                return True
             elif status == WLAN_STATUSES.STAT_CONNECTING:
                 print("Waiting for Connection...")
                 continue
             else:
                 print("Connection Failed")
                 break
+    return False
+
+
+while True:
+    if reconnect(None):
+        break
+
+connection_timer = Timer()
+connection_timer.init(period=30000, mode=Timer.PERIODIC, callback=reconnect)

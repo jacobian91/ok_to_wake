@@ -31,5 +31,7 @@ led_check_timer.init(period=3000, mode=Timer.PERIODIC, callback=led_check)
 
 
 def stop():
+    "Stops all timers, helper function to keep REPL clean."
     led_check_timer.deinit()
     led_control.heartbeat_timer.deinit()
+    connect.connection_timer.deinit()
