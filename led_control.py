@@ -1,4 +1,5 @@
 from machine import PWM, Pin, Timer
+import time
 
 PWM_100_U16 = 65535
 PWM_FREQ = 500
@@ -22,7 +23,9 @@ def color_pwm_set(r, g, b):
 
 
 def heartbeat(_):
-    heartbeat_led.toggle()
+    heartbeat_led.on()
+    time.sleep(0.001)
+    heartbeat_led.off()
 
 
 def run_heartbeat(period: int):
