@@ -15,6 +15,16 @@ pwm_r.freq(PWM_FREQ)
 pwm_g.freq(PWM_FREQ)
 pwm_b.freq(PWM_FREQ)
 
+RED = (100, 0, 0)
+GREEN = (0, 100, 0)
+DIMGREEN = (0, 60, 0)
+BLUE = (0, 0, 100)
+WHITE = (100, 100, 100)
+BLUEGREEN = (0, 100, 100)
+PURPLE = (100, 0, 100)
+YELLOW = (100, 20, 0)
+DIMWHITE = (10, 10, 10)
+
 
 def color_pwm_set(r, g, b):
     pwm_r.duty_u16(int(r * PWM_100_U16 / 100))
