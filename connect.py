@@ -1,7 +1,10 @@
-import network
 import time
 import credentials
+
+import network
 from machine import Timer
+
+import credentials
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
