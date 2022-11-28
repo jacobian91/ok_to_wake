@@ -25,10 +25,16 @@ PURPLE = (100, 0, 100, "PURPLE")
 YELLOW = (100, 20, 0, "YELLOW")
 DIMWHITE = (10, 10, 10, "DIM WHITE")
 
+current_led_setting = (0, 0, 0, "OFF")
+
 
 def color_pwm_set(r, g, b, color_name=None):
-    if color_name:
-        print(f"Setting Color to: {color_name}")
+    global current_led_setting
+    if (r, g, b, color_name) == current_led_setting:
+        print(f"No Change to LED needed, keeping as: {color_name}")
+        return
+    print(f"Setting Color to: {color_name} from {current_led_setting[3]}")
+    current_led_setting = (r, g, b, color_name)
     pwm_r.duty_u16(int(r * PWM_100_U16 / 100))
     pwm_g.duty_u16(int(g * PWM_100_U16 / 100))
     pwm_b.duty_u16(int(b * PWM_100_U16 / 100))
