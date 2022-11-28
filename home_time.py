@@ -3,6 +3,8 @@ import time
 import ntptime
 import urequests as requests
 
+import logger
+
 try:  # Type checking
     import typing
 
@@ -24,7 +26,7 @@ initialized_time = {"status": False}
 def get_home_time() -> Dict[str, int]:
     if time.time() - TWLEVE_HOURS > local_details["last_sync"]:
         try:
-            print("New Time Sync")
+            logger.log("New Time Sync")
             ntptime.settime()
             initialized_time["status"] = True
             local_details["last_sync"] = time.time()
@@ -35,8 +37,9 @@ def get_home_time() -> Dict[str, int]:
             unixtime = response["unixtime"]
         except Exception as exc:
             if initialized_time["status"]:
-                pass  # Was initialized once, trust current RTC for now
+                logger.log("Time Error: Initialized previously, trusting current RTC")
             else:
+                logger.log("Time Error: Uninitialized")
                 raise exc
     else:
         unixtime = time.time()

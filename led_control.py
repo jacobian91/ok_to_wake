@@ -1,5 +1,6 @@
 from machine import PWM, Pin, Timer
 import time
+import logger
 
 PWM_100_U16 = 65535
 PWM_FREQ = 500
@@ -33,7 +34,7 @@ def color_pwm_set(r, g, b, color_name=None):
     if (r, g, b, color_name) == current_led_setting:
         print(f"No Change to LED needed, keeping as: {color_name}")
         return
-    print(f"Setting Color to: {color_name} from {current_led_setting[3]}")
+    logger.log(f"Setting Color to: {color_name} from {current_led_setting[3]}")
     current_led_setting = (r, g, b, color_name)
     pwm_r.duty_u16(int(r * PWM_100_U16 / 100))
     pwm_g.duty_u16(int(g * PWM_100_U16 / 100))

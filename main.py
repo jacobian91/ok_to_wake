@@ -1,6 +1,7 @@
 from machine import Timer, reset
 
 import led_control
+import logger
 
 led_control.color_pwm_set(*led_control.BLUE)
 led_control.run_heartbeat(period=200)
