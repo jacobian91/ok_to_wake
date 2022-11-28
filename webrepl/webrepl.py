@@ -121,12 +121,12 @@ def accept_conn(listen_sock):
     prev = os.dupterm(None)
     os.dupterm(prev)
     if prev:
-        print(
+        print(  # added by @jacobian91
             "\nConcurrent WebREPL connection from",
             remote_addr,
             "overtaking as new connection and closing this one",
         )
-        prev.close()
+        prev.close()  # added by @jacobian91
     print("\nWebREPL connection from:", remote_addr)
     client_s = cl
 
@@ -156,7 +156,7 @@ def start(port=8266, password=None, accept_handler=accept_conn):
     webrepl_pass = password
     if webrepl_pass is None:
         try:
-            from . import webrepl_cfg
+            from . import webrepl_cfg  # modified by @jacobian91
 
             webrepl_pass = webrepl_cfg.PASS
             if hasattr(webrepl_cfg, "BASE"):
