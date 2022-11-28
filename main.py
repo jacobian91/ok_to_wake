@@ -27,7 +27,10 @@ LIGHT_TIMES = [
 
 
 def led_check(timer_param=None):
-    current_time = home_time.get_home_time()
+    try:
+        current_time = home_time.get_home_time()
+    except OSError:
+        return  # Failed to get time, try again next time this is called
     time_s = [f"{name}={current_time[name]}" for name in home_time.TIME_NAMES]
     time_s = " ".join(time_s)
     print(time_s)
