@@ -34,7 +34,7 @@ def led_check(timer_param=None):
     time_s = [f"{name}={current_time[name]}" for name in home_time.TIME_NAMES]
     time_s = " ".join(time_s)
     print(time_s)
-    current_hour_min = current_time["hour"] * 100 + current_time["sec"]
+    current_hour_min = current_time["hour"] * 100 + current_time["min"]
     for light_time, light_color in LIGHT_TIMES:
         if current_hour_min >= light_time:
             led_control.color_pwm_set(*light_color)
