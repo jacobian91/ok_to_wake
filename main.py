@@ -20,8 +20,7 @@ LIGHT_TIMES = [
     (1700, led_control.RED),
     (900, led_control.DIMWHITE),
     (630, led_control.GREEN),
-    (500, led_control.DIMGREEN),
-    (430, led_control.YELLOW),
+    (600, led_control.YELLOW),
     (0, led_control.RED),
 ]
 
