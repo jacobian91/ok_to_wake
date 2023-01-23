@@ -18,9 +18,9 @@ led_control.color_pwm_set(*led_control.WHITE)
 
 LIGHT_TIMES = [
     (1700, led_control.RED),
-    (900, led_control.DIMWHITE),
+    (745, led_control.DIMWHITE),
     (630, led_control.GREEN),
-    (600, led_control.YELLOW),
+    (500, led_control.YELLOW),
     (0, led_control.RED),
 ]
 
